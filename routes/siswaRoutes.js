@@ -44,15 +44,15 @@ router.put('/:kode_siswa', (req, res) => {
 });
 
 router.delete('/:kode_siswa', (req, res) => {
-  const { nim } = req.params;
-  const sql = 'DELETE FROM mahasiswa WHERE kode_siswa = ?';
+  const { kode_siswa } = req.params;
+  const sql = 'DELETE FROM siswa WHERE kode_siswa = ?';
 
   db.query(sql, [kode_siswa], (err, result) => {
     if (err) {
       return res.status(500).json({ message: 'Gagal menghapus data siswa', error: err.message });
     }
     if (result.affectedRows === 0) {
-      return res.status(404).json({ message: `siswa dengan kode siswa ${kode_siswa  } tidak ditemukan` });
+      return res.status(404).json({ message: `siswa dengan kode siswa ${kode_siswa} tidak ditemukan` });
     }
     res.status(200).json({ message: 'Data siswa berhasil dihapus' });
   });
